@@ -30,3 +30,5 @@ cd app
 
 ls -lrt
 ```
+### How to remove volume
+docker volume rm--------volume name.
