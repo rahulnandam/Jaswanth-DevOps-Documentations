@@ -1,0 +1,34 @@
+In Kubernetes, a Service Account is an object that provides an identity for processes that run in a Pod. 
+This identity is used to interact with the Kubernetes API and other services.
+Service Accounts are primarily used to control access to the Kubernetes API and to manage permissions through Role-Based Access Control (RBAC).
+
+
+RBAC is used to manage access to users/Service Accounts  in a Kubernetes cluster
+
+
+users, service accounts
+
+user management [dev team. qa team]-----> providng roles for each group so that they can haev restricions over the cluster[Admin/devops team have full access]
+service management------> managing the access of the services that are running on cluster 
+
+
+
+SA/USERS
+ROLES/ CLUSTER ROLE [like IAM role in AWS]
+ROLE BINDING / CLUSTER ROLE BINDING [like IAM policies in AWS]
+
+K8s doesn't deal with User management , rather offloading to identity providers [ex: linkden singup/login with google with out registarion]
+
+
+role ----------> to create access to users to access pods,config maps, secrets within NS..for attaching role we use role binding
+cluster role --> to create access to users to access pods,config maps, secrets accross k8s cluster....for attaching cluster role we use cluster role binding
+
+
+# Check to see if service account "foo" of namespace "dev" can list pods in the namespace "prod"
+  # You must be allowed to use impersonation for the global option "--as"
+  kubectl auth can-i list pods --as=system:serviceaccount:dev:foo -n prod 
+
+kubectl auth can-i --as=system:serviceaccount:default:sa-rahul get pods -n default
+kubectl auth can-i --as=system:serviceaccount:default:sa-rahul get pods -n new-namespace
+
+
